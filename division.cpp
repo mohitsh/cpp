@@ -32,6 +32,34 @@ int main(){
 	int value = pow(base,exp);
 	std::cout << "value: " << value << "\n";
 
+	int d = 5;
+	std::cout << sizeof(d) << "\n";
+	double m = 10;
+	std::cout << sizeof(m) << "\n";
+
+	if (m > d){
+		std::cout << true << "\n";
+	}else{
+		std::cout << false << "\n";
+	}
+
+	int ans;
+	ans = (m>d) ? true : false;
+	std::cout << ans << "\n";
+
+	double d1 = 100-99.99;
+	double d2 = 10-9.99;
+
+	if (d1 == d2){
+		std::cout << "d1 == d2" << "\n";
+	}
+	else if (d1 > d2){
+		std::cout << "d1 > d2" << "\n";
+	}
+	else if (d1 < d2){
+		std::cout << "d1 < d2" << "\n";
+	}
+
 	return 0;
 
 }
