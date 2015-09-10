@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <cmath>
 
 int main(){
 
@@ -19,6 +20,18 @@ int main(){
 		}
 	num = num + 1;
 	}
+
+	// power exploration
+
+	std::cout << "enter base: " << "\n";
+	double base;
+	std::cin >> base;
+	std::cout << "entere exp: " << "\n";
+	int exp;
+	std::cin >> exp;
+	int value = pow(base,exp);
+	std::cout << "value: " << value << "\n";
+
 	return 0;
 
 }
