@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cmath>
 
+void binary(int);
+
 int main(){
 
 	int x = 7;
@@ -60,6 +62,16 @@ int main(){
 		std::cout << "d1 < d2" << "\n";
 	}
 
+	
+	binary(117);	
 	return 0;
-
 }
+
+void binary(int num){
+
+	while (num > 0){
+	std::cout << num%2;
+	num = num/2;
+	}
+}
+
