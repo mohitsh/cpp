@@ -10,7 +10,7 @@ void passValue(int value){
 
 // whole array gets pass so after a pass to arrayValue
 // prime array will be replaced
-void arrayValue(int prime[5]){
+void arrayValue(const int prime[5]){
 
 	prime[0] = 11;
 	prime[1] = 7;
