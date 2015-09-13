@@ -1,6 +1,13 @@
 
 #include <iostream>
 
+void printIncrement(void){
+
+	static int value = 1;
+	++value;
+	std::cout << value << "\n";
+}
+
 int main(){
 
 	int a;	
@@ -21,5 +28,9 @@ int main(){
 	std::cout << "value of a " << a << "\n";
 	std::cout << "value of b " << b << "\n";
 	}
+	
+	printIncrement();
+	printIncrement();
+	printIncrement();
 
 }

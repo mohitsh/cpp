@@ -12,6 +12,10 @@ int main(void){
 	std::cout << "this is line two" << std::endl;
 	std::cout << "this is line three" << std::endl;
 	std::cout << "this is line four" << std::endl;
+
+	int num = 0;
+	std::cin >> num;
+	std::cout << "you entered this number: " << num << std::endl;
 	return 0;
 
 }

@@ -2,17 +2,22 @@
 
 #include <iostream>
 
-int add(int x, int y){
-
-	return x+y;
-
-}
+int add(int x, int y, int z);
 
 int main(){
 
-	int a = 5;
-	int b = 6;
+	//int a = 5;
+	//int b = 6;
 	
-	std::cout << add(a,b) << " << hello, that was the answer" << std::endl;
+	std::cout << add(3,4, 5) << " << hello, that was the answer" << std::endl;
 	return 0;
 }
+
+
+int add(int x, int y, int z){
+
+	return x+y+z;
+
+}
+
+

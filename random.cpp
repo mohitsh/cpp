@@ -52,7 +52,7 @@ int main(){
 	
 	std::cout << "time " << time(0) << "\n";
 	
-	std::cout << getRandomNumber(1,6) << "\n";
+	std::cout << getRandomNumber(1,6);
 	
 }
 
