@@ -53,14 +53,21 @@ void bubble_sort(int array[]){
 
 void short_bubble(int array[]){
 	const int size = 10;
+	/*
+	std::cout << "HOLA hola HOLA" << "\n";
+	for (int o = 0; o<size; ++o)
+		std::cout << array[o] << "\n";
+	*/
 	static int count = 0;
 	for (int i = size-1; i>0; --i){
-		int index = 0;
-		int exchange = 1;
-		while (exchange == 1 && index < i){
-			exchange = 0;
+		static int index = 0;
+		static bool exchange = true;
+		while (exchange && index < i){
+			std::cout << "im in while loop" << "\n";
+			exchange = false;
 			if (array[index] > array[index+1]){
-				exchange = 1;
+				std::cout << "fuck this" << "\n";
+				exchange = true;
 				std::swap(array[index],array[index+1]);
 				++count;
 			}
