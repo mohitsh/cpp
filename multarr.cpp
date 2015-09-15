@@ -1,6 +1,7 @@
 
 
 #include <iostream>
+#include <cstring>
 
 int main(){
 
@@ -34,6 +35,46 @@ int main(){
 		}
 		std::cout << "\n";
 	}
+	char mystring[] = "string";
+	std::cout << mystring << " has " << sizeof(mystring) << " characters" << "\n"; 
+	for(int i = 0; i<sizeof(mystring); ++i)
+		std::cout << static_cast<int>(mystring[i]) << " ";	
+	std::cout << "\n";
 
+	char ceo[] = "verma ji";
+	std::cout << ceo << "\n";
+	// '' denotes character and "" denotes string so here 
+	// use '' because its a character not a string
+	ceo[1] = 'D'; 
+	std::cout << ceo << "\n";
+	
+	char input[10];
+	std::cout << "provide input ->" << "\n";
+	std::cin.getline(input, 10);
+	std::cout << "your input -> " << input << "\n";
+	
+	char source[] = "darkLord";
+	std::cout << "original -> " << source << "\n";
+	char dest[11];
+	strcpy(dest,source);
+	std::cout << "copied -> " << dest << "\n";
+
+	char source1[] = "utkarhPatange";
+	std::cout << "original: " << source1 << "\n";
+	char copy[49];
+	strncpy(copy,source1,49);
+	copy[49] = 0;
+	std::cout << "copied: " << copy << "\n";
+
+	std::cout << "good part: " << "\n";
+	char name[20] = "mohit";
+	std::cout << "sizeof: " << sizeof(name) << "\n";
+	std::cout << "strlen: " << strlen(name) << "\n";
 
 }
+
+
+
+
+
+
