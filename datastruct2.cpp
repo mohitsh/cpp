@@ -10,7 +10,7 @@ void passValue(int value){
 
 // whole array gets pass so after a pass to arrayValue
 // prime array will be replaced
-void arrayValue(const int prime[5]){
+void arrayValue(int prime[5]){
 
 	prime[0] = 11;
 	prime[1] = 7;
@@ -32,6 +32,13 @@ int main(){
 	std::cout << "before arrayValue " << prime[0] << " " << prime[1] << " " << prime[2] << " " << prime[3] << " " << prime[4] << "\n";
 	arrayValue(prime);
 	std::cout << "after arrayValue " << prime[0] << " " << prime[1] << " " << prime[2] << " " <<  prime[3] << " " << prime[4] << "\n";
+
+	int dabba[5] = {1,2,3,4,5};
+	int total = 0;
+	for (int i=0; i<5; ++i){
+		total = total + dabba[i];
+	}
+	std::cout << "total sum " << total << "\n";
 
 	return 0;
 

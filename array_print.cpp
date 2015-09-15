@@ -51,6 +51,31 @@ void bubble_sort(int array[]){
 	std::cout << "\n";
 }
 
+void short_bubble(int array[]){
+	const int size = 10;
+	static int count = 0;
+	for (int i = size-1; i>0; --i){
+		int index = 0;
+		int exchange = 1;
+		while (exchange == 1 && index < i){
+			exchange = 0;
+			if (array[index] > array[index+1]){
+				exchange = 1;
+				std::swap(array[index],array[index+1]);
+				++count;
+			}
+		index = index + 1;
+		}
+	}
+	
+	std::cout << "okay this is short bubble sorted array ->" << "\n";
+	for (int k = 0; k < size; ++k){
+		std::cout << array[k] << " "; 	
+	}
+	std::cout << "\n";
+	std::cout << "count ->" << count << "\n";
+}
+
 int main(){
 
 	int input;
@@ -70,12 +95,15 @@ int main(){
 	std::cout << "n1 " << n1 << " n2 " << n2 << "\n";
 	std::swap(n1,n2);
 	std::cout << "n1 " << n1 << " n2 " << n2 << "\n";
-	
+	const int size = 10;
 	int array[10] = {34,56,23,11,9,43,78,51,38,17};
-	for (auto num:array)
-		std::cout << num << "\n";
+	std::cout << "this is original array ->" << "\n";
+	for (int m = 0; m<size; ++m)
+		std::cout << array[m] << " ";
+	std::cout << "\n";
 	//selection_sort(array);	
-	bubble_sort(array);
+	//bubble_sort(array);
+	short_bubble(array);
 	return 0;
 }
 
