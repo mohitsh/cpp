@@ -89,6 +89,7 @@ int main(){
 	//char word = 'Q';	
 	char c = 'Q';
 	std::cout << &c << "\n";
+	
 
 }
 
