@@ -30,7 +30,17 @@ int main(){
 	delete[] array;
 	array = 0;
 	//std::cout << array[0] << "\n";
+	
+	int arr[5] {1,2,3,4,5};
+	int *arr = new int[5] {1,2,3,4,5};	
+	
+
 
 
 }
+
+
+
+
+
 
