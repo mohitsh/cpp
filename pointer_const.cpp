@@ -39,6 +39,13 @@ int main(){
 	std::cout << "this is five " << num << "\n";
 	changenum(num);
 	std::cout << "this is six " << num << "\n";
+
+	std::cout << "loop below beware!" << "\n";
+	int array[5] = {9,7,5,3,1};
+	for (const auto &elem: array){
+		std::cout << elem << " ";
+	}
+	std::cout << "\n";	
 }
 
 
