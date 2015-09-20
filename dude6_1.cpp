@@ -12,6 +12,22 @@ namespace StudentNames{
 	};
 }
 
+void passValue(int value){
+
+	value = 9999;
+
+}
+
+void passArray(int arr[5]){
+
+	arr[0] = 10;
+	arr[1] = 11;
+	arr[2] = 12;
+	arr[3] = 13;
+	arr[4] = 14;
+	std::cout << "inside passArray: " << sizeof(arr) << "\n";
+}
+
 int main(){
 
 	// initializing a fixed array of length 30
@@ -53,7 +69,28 @@ for (auto num:dalla)
 int testScores1[StudentNames::MAX_STUDENTS];
 testScores1[StudentNames::DALLA] = 3000;
 
-std::cout << testScores1[StudentNames::DALLA];
+std::cout << testScores1[StudentNames::DALLA] << "\n";
+
+std::cout << "beware! passing values and arrays to functions: " << "\n";
+
+int daddu = 10001;
+std::cout << "before passing daddu: " << daddu << "\n";
+passValue(daddu);
+std::cout << "after passing daddu: " << daddu << "\n";
+
+int jangi[5] {21,22,23,24,25};
+
+for (auto num:jangi)
+	std::cout << num << " ";
+std::cout << "\n";
+std::cout << "size of array before passing: " << sizeof(jangi) << "\n";
+
+passArray(jangi);
+for (auto num:jangi)
+	std::cout << num << " ";
+std::cout << "\n";
+
+std::cout << "size of array after passing: " << sizeof(jangi) << "\n";
 
 return 0;
 
