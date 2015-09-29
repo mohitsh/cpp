@@ -31,7 +31,7 @@ int main(){
 		temp->data = info;
 		temp->next = head;
 		head = temp;
-		cout << temp->data << "\n";
+		//cout << temp->data << "\n";
 		counter++;	
 	}
 	else
@@ -46,10 +46,10 @@ int main(){
 		temp->data = info;
 		temp->next = NULL;
 		temp1->next = temp;
-		cout << temp->data << "\n";
+		//cout << temp->data << "\n";
 		
 	}
-		cout << "head pointer: " << head << "\n";
+		cout << "\n";
 
 	}
 
