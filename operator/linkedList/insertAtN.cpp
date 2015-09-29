@@ -189,8 +189,49 @@ int main(){
 	cout << "\n";
 	}	
 		
+	// node sorting
+	node *sort1;
+	node *sort2;
+
+	sort1 = (node*)malloc(sizeof(node));
+	sort2 = (node*)malloc(sizeof(node));
+
+	int temp = 0;  // will be usedf for swappint
+	
+	for (sort1 = head; sort1 != NULL; sort1 = sort1->next){
+		for (sort2 = sort1->next; sort2 != NULL; sort2 = sort2->next){
+			if (sort1->data > sort2->data){
+				temp = sort1->data;
+				sort1->data = sort2->data;
+				sort2->data = temp;
+			}
+		}
+	}
+	
+	cout << "after sorting traversing the linked list " << "\n";
+
+	node *t;
+	t = (node*)malloc(sizeof(node));
+	t = head;
+	if (t==NULL)
+		cout << "empty!" << "\n";
+	else{
+		while(t!=NULL){
+			cout << t->data << " ";
+			t = t->next;
+		}
+	cout << "\n";
+	}
+		
+
 
 }
+
+
+
+
+
+
 
 
 
