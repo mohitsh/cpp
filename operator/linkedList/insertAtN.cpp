@@ -69,6 +69,15 @@ int main(){
 	cin >> val;
 	
 	// find the index to enter at
+	
+	if (index == 0){
+		node *tmp;
+		tmp = (node*)malloc(sizeof(node));
+		tmp->data = val;
+		tmp->next = head;
+		head = tmp;
+	}
+	else{
 	node *temp3;	
 	temp3 = (node*)malloc(sizeof(node));
 	temp3 = head;
@@ -87,6 +96,7 @@ int main(){
 	temp4->data = val;
 	temp4->next = temp3->next;
 	temp3->next = temp4;
+	}
 	}
 
 	// traverse the linked list once again
