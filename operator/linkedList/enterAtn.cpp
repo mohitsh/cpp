@@ -50,4 +50,20 @@ int main(){
 	}
 	cout << "\n";
 }
+
+	// deleting from front
+	node *temp;
+	temp = (node*)malloc(sizeof(node));
+	temp = head;
+	head = temp->next;
+	free(temp);
+	cout << "After deleting first node" << "\n";
+	node *traver;
+	traver = head;
+	while(traver!=NULL){
+		cout << traver->data << " ";
+		traver = traver->next;
+	}
+	cout << "\n";
+
 }
