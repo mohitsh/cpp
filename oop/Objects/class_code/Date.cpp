@@ -11,7 +11,9 @@ class Date
 		
 		Date() {}
 	public:
+		// prototype of constructor 
 		Date(int month, int date, int year);
+		// prototype of function
 		void setDate(int month, int date, int year);
 		
 		int GetMonth() {return m_month;}
@@ -20,12 +22,13 @@ class Date
 
 };
 
+// implementation of class
 Date::Date(int month, int date, int year)
 {
 	setDate(month, date, year);
 
 }
-
+// implementation of function
 void Date::setDate(int month, int date, int year)
 {
 
