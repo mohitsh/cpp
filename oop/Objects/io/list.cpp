@@ -3,6 +3,10 @@
 #include <iostream>
 #include <list>
 #include <set>
+#include <map>
+#include <stack>
+#include <queue>
+
 int main()
 {
 	using namespace std;
@@ -50,8 +54,73 @@ int main()
 		cout << *it1 << " ";
 	
 	cout << endl;
+	
+	map<int,string> mp;
+	mp[1] = "Tapan";
+	mp[2] = "Kutta";
+	mp[3] = "Mittal";
+	mp[4] = "Jain";
+	mp[5] = "dalla";
+	
+	map<int,string>::iterator it3;
+	for (it3 = mp.begin(); it3!=mp.end(); it3++)
+		cout << "key: " << it3->first << " value: " << it3->second << "\n";
+
+	cout << endl;
+
+	stack<int> stack1;
+	for (int i = 0; i<10; i++)
+		stack1.push(i);
+	
+	cout << stack1.size() << endl;
+	cout << stack1.empty() << endl;
+
+	cout << "popped stack starts: " << endl;
+	while (!stack1.empty())
+	{
+		cout << stack1.top() << " ";
+		stack1.pop();
+	}
+	cout << endl << "popped stack ends: " << endl;
+
+	cout << stack1.size() << endl;
+	cout << stack1.empty() << endl;
+	
+	string b[] {"jain","kutta","bohra","tapan","dalla"};
+	
+	queue<string> q;
+	int length1 = sizeof(b)/sizeof(*b);
+	for (int i = 0; i<length1; i++)
+		q.push(b[i]);
+	
+	while (!q.empty())
+	{
+		cout << q.front() << "\n";
+		q.pop();
+	}
+
+	priority_queue<int> pq;
+	int arr1[] {34,23,1223,435,1263,455,12,423,1935,9090};
+	int len = sizeof(arr1)/sizeof(*arr1);
+	//cout << "len: " << len << endl;
+
+	for (int i = 0; i<len; i++)
+		pq.push(arr1[i]);
+
+	cout << "priority queue starts here: " << "\n";
+	while (!pq.empty()){
+		cout << pq.top() << "\n";
+		pq.pop();
+	}
+	cout << "and it ends here: " << "\n";
+
 }
 	
+
+
+
+
+
 
 
 
