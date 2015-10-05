@@ -48,8 +48,14 @@ class Employee: public Person
 		double GetHourlySalary(){ return m_dHourlySalary;}
 		void PrintNameAndSalary()
 		{
-			cout << m_strName << ":" << m_dHourlySalary << endl;
+			cout << m_strEmployeeName << ":" << m_dHourlySalary << endl;
 		}
+};
+
+class Supervison: public Employee
+{
+	public:
+		int m_nOverseesIDs[5];
 };
 
 int main()
@@ -58,8 +64,8 @@ int main()
 	BaseballPlayer dude;
 	dude.m_strName = "bohra dude";
 	cout << dude.GetName() << endl;
-	Employee bohra;
-	bohra.PrintNameAndSalary
+	Employee bohra("bohra",10000,1234);
+	bohra.PrintNameAndSalary();
 	return 0;
 }
 
