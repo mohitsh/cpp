@@ -73,18 +73,23 @@ vector<int> findbest(vector< vector<int> > &v, int i, int j, int row, int col)
 
 int search(vector< vector<int> > &v, int row, int col)
 {
-	int c_row = 0;
-	int c_col = 0;
-	vector<int> step;
-	//step = findbest(v,c_row,c_col,row,col);
-	//c_row = step[0];
-	//c_col = step[1];
-	while(c_col != col-1)
+
+	for (int i =0; i<row; ++i)
 	{
-		step = findbest(v,c_row,c_col,row,col);
-		c_row = step[0];
-		c_col = step[1];
-		cout << c_row << " " << c_col << endl;
+		cout << "Starting with Row: " << i << endl;
+		int c_row = i;
+		int c_col = 0;
+		vector<int> step;
+		//step = findbest(v,c_row,c_col,row,col);
+		//c_row = step[0];
+		//c_col = step[1];
+		while(c_col != col-1)
+		{
+			step = findbest(v,c_row,c_col,row,col);
+			c_row = step[0];
+			c_col = step[1];
+			cout << c_row << " " << c_col << endl;
+		}
 	}
 }
 
