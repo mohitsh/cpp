@@ -11,82 +11,81 @@
 
 using namespace std;
 
-int findbest(vector< vector<int> > &v, int i, int j, int row, int col)
+vector<int> findbest(vector< vector<int> > &v, int i, int j, int row, int col)
 {
 	vector<int> vec;
-		int j = 0;
 		if (i == 0)
-		{
-			//vec.push_back(v[i+1][j]);
-			//vec.push_back(v[i][j+1]);
-			//int value = *max_element(vec.begin(),vec.end());
-			int arr[2];
-			if (v[i+1][j] > v[i][j+1])
 			{
-				arr[0] = i+1;
-				arr[1] = j;
-			}
-			else
-			{
-				arr[0] = i;
-				arr[1] = j+1;	
-			}
+				if (v[i+1][j] > v[i][j+1])
+					{
+						vec.push_back(i+1);
+						vec.push_back(j);
+						v[i][j] = 0;
+					}
+				else
+					{
+						vec.push_back(i);
+						vec.push_back(j+1);	
+						v[i][j] = 0;
+					}
 					
-			return arr;
-		}
-		else if ( i == row-1)
-		{
-			//vec.push_back(v[i-1][j]);
-			//vec.push_back(v[i][j+1]);
-			//int value = *max_element(vec.begin(),vec.end());
-			int arr[2];
-			if (v[i-1][j] > v[i][j+1])
+				return vec;
+			}
+			else if ( i == row-1)
 			{
-				arr[0] = i-1;
-				arr[1] = j;
+				if (v[i-1][j] > v[i][j+1])
+				{
+					vec.push_back(i-1);
+					vec.push_back(j);
+					v[i][j] = 0;
+				}
+				else
+				{
+					vec.push_back(i);
+					vec.push_back(j+1);
+					v[i][j] = 0;
+				}
+				return vec;
 			}
 			else
 			{
-				arr[0] = i;
-				arr[1] = j+1;
-			}
-			return arr;
-		}
-		else
-		{
-			vec.push_back(v[i-1][j]);	
-			vec.push_back(v[i+1][j]);
-			vec.push_back(v[i][j+1]);
-			//int value = *max_element(vec.begin(),vec.end());
-			int arr[2];
-			if (v[i-1][j] >= v[i+1][j] and v[i-1][j] >= v[i][j+1]) 
-			{
-				arr[0] = i-1;
-				arr[1] = j;
-			}
-			else if (v[i+1][j] >= v[i-1][j] and v[i+1][j] >=v[i][j+1])
-			{
-				arr[0] = i+1;
-				arr[1] = j;
-			}
-			else if (v[i][j+1] >= v[i+1][j] and v[i][j+1] >= v[i-1][j])
-			{
-				arr[0] = i;
-				arr[1] = j+1;
-			}
-			return arr;
-		}
-		
-	
-		
-
-	return 0;
+				if (v[i-1][j] >= v[i+1][j] and v[i-1][j] >= v[i][j+1]) 
+				{
+					vec.push_back(i-1);
+					vec.push_back(j);
+					v[i][j] = 0;
+				}
+				else if (v[i+1][j] >= v[i-1][j] and v[i+1][j] >=v[i][j+1])
+				{
+					vec.push_back(i+1);
+					vec.push_back(j);
+					v[i][j] = 0;
+				}
+				else if (v[i][j+1] >= v[i+1][j] and v[i][j+1] >= v[i-1][j])
+				{
+					vec.push_back(i);
+					vec.push_back(j+1);
+					v[i][j] = 0;
+				}
+				return vec;
+			}		
 }
 
-void search(vector< vector<int> > &v, int row, int col)
+int search(vector< vector<int> > &v, int row, int col)
 {
-	int step = findbest(v,0,0,row,col);
-		
+	int c_row = 0;
+	int c_col = 0;
+	vector<int> step;
+	//step = findbest(v,c_row,c_col,row,col);
+	//c_row = step[0];
+	//c_col = step[1];
+	while(c_col != col-1)
+	{
+		step = findbest(v,c_row,c_col,row,col);
+		c_row = step[0];
+		c_col = step[1];
+		cout << c_row << " " << c_col << endl;
+	}
 }
 
 int main()
