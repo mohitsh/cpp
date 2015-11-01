@@ -1,145 +1,32 @@
 
 #include <iostream>
 #include <algorithm>
-#include <deque>
-#include <string>
-#include <stack>
 #include <cstdlib>
 #include <vector>
-#include <list>
-#include <iomanip>
-
+#include <string>
 using namespace std;
 
-vector<int> turnRight(vector< vector<int> > &v, int i, int j, int row, int col);
-vector<int> turnUp(vector< vector<int> > &v, int i, int j, int row, int col);
-vector<int> turnDown(vector< vector<int> > &v, int i, int j, int row, int col);
-
-vector<int> turnRight(vector< vector<int> > &v, int i, int j, int row, int col)
-{	
-
-	vector<int> vec;
-		if (v[i][j+1] != 0 and v[i][j+1] != -1)
-		{
-			vec.push_back(i);
-			vec.push_back(j+1);
-			v[i][j] = 0;
-			return vec;
-		}
-		else
-                {
-                        vec.push_back(-1);      
-                        return vec;
-                }
-
-}
-
-vector<int> turnUp(vector< vector<int> > &v, int i, int j, int row, int col)
+int search(vector< vector<int> > &v,int i, int j, int row, int col)
 {
-	vector<int> vec;
-		if (v[i-1][j] != 0 and v[i-1][j] != -1)
-		{
-			vec.push_back(i-1);
-			vec.push_back(j);
-			v[i][j] = 0;
-			return vec;
-		}
-		else
-                {
-                        vec.push_back(-1);      
-                        return vec;
-                }
 
-}
+	//vector< vector<int> > v = v1;
+	if (v[i][j] == -1)
+		return -1;
+	if (v[i][j] == 0)
+		return 0;
+	if (j == col-1)
+		return 1;
 
-vector<int> turnDown(vector< vector<int> > &v, int i, int j, int row, int col)
-{
-        vector<int> vec;
-		if (v[i+1][j] != 0 and v[i+1][j] != -1)
-		{
-			vec.push_back(i+1);
-			vec.push_back(j);
-			v[i][j] = 0;
-			return vec;
-		}
-		else
-		{
-			vec.push_back(-1);	
-			return vec;
-		}
-}
-
-
-int search(vector< vector<int> > &v1, int row, int col)
-{
-	for (int i =0; i<row; ++i)
+	if (v[i][j] != -1 and v[i][j] != 0)
 	{
-		vector< vector<int> > v  = v1;
-		cout << "Starting with Row: " << i << endl;
-		int c_row = i;
-		int c_col = 0;
-		int sum = v[c_row][c_col];
-		vector<int> step;
-		while(c_col != col-1)
-		{
-			if(c_row != row-1)
-			{
-				step = turnDown(v,c_row,c_col,row,col);
-				if (step[0] != -1)
-				{	
-				c_row = step[0];
-				c_col = step[1];
-				sum = sum + step[2];
-				cout << c_row << " " << c_col << endl;
-				}
-			}
-                        step = turnRight(v,c_row,c_col,row,col);
-			if (step[0] != -1)
-			{
-                        c_row = step[0];
-                        c_col = step[1];
-                        sum = sum + step[2];
-                        cout << c_row << " " << c_col << endl;
-			}
-                        if(c_row != 0)
-			{
-				step = turnUp(v,c_row,c_col,row,col);
-				if (step[0] != -1)
-				{
-               	         	c_row = step[0];
-                     	   	c_col = step[1];
-                 		sum = sum + step[2];
-                        	cout << c_row << " " << c_col << endl;
-				}
-			}
-
-		}
-		
-		int sum1 = sum;
-		int sum2 = sum;
-		for (int p=c_row-1; p>=0; --p)
-		{
-			if (v[p][c_col] == -1)
-				break;
-			else
-				sum1 = sum1+v[p][c_col];
-		}
-		for (int p = c_row+1; p<row; ++p)
-		{
-			if (v[c_row+1][c_col] == -1)
-				break;
-			else
-				sum2 = sum2 + v[p][c_col];
-		}
-		cout << "sum1: " << sum1 << endl;
-		cout << "sum2: " << sum2 << endl;
+		search(v,i+1,j,row,col);
+		search(v,i,j+1,row,col);
+		search(v,i,j-1,row,col);
 	}
-	//cout << "sum: " << sum << endl;
 }
 
 int main()
 {
-
 	int n,m;
 	cout << "rows and columns: ";
 	cin >> n >> m;	
@@ -155,18 +42,13 @@ int main()
 			v[i].push_back(num);
 		}
 	}
-	
 	for (int i = 0; i<n; ++i)
 	{
 		for (int j = 0; j<m; ++j)
-		{
-			//cout << v[i][j] << " ";
-		
-		}
+			cout << v[i][j] << " ";
 		//cout << "\n";
 	}	
-	// send total no of rows
-	search(v,n,m);
+	cout << search(v,0,0,n,m) << endl;
 	return 0;
 }
 

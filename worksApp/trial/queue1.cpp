@@ -18,46 +18,50 @@ vector<int> findbest(vector< vector<int> > &v, int i, int j, int row, int col)
 		if (i == 0)
 		{
 			//cout << "dude I'm here!!!" << endl;
-			if (v[i+1][j] > v[i][j+1])
+			if (v[i+1][j] > v[i][j+1] and v[i+1][j] > v[row-1][j])
 			{
 				vec.push_back(i+1);
 				vec.push_back(j);
 				vec.push_back(v[i+1][j]);
 				v[i][j] = 0;
 			}
-			else
+			else if (v[i][j+1] > v[i+1][j] and v[i][j+1] > v[row-1][j])
 			{
 				vec.push_back(i);
 				vec.push_back(j+1);
 				vec.push_back(v[i][j+1]);	
 				v[i][j] = 0;
 			}
-					
+			else if (v[row-1][j] > v[i+1][j] and v[row-1][j] > v[i][j+1])
+			{
+				vec.push_back(row-1);
+				vec.push_back(j);
+				vec.push_back(v[row-1][j]);
+				v[i][j] = 0;
+			}		
 			return vec;
 		}
 		else if ( i == row-1)
 		{
-			//cout << "for last row: " << endl;
-			//cout << "i-1 " << i-1 << endl;
-			//cout << "j " << j << endl;
-			//cout << "i " << i << endl;
-			//cout << "j+1 " << j+1 <<endl;
-			//cout << v[i-1][j] << endl;
-			//cout << v[i][j+1] << endl;
-			if (v[i-1][j] > v[i][j+1])
+			if (v[i-1][j] > v[i][j+1] and v[i-1][j] > v[0][j])
 			{
-				//cout << "last row should be here! " << endl;
 				vec.push_back(i-1);
 				vec.push_back(j);
 				vec.push_back(v[i-1][j]);
 				v[i][j] = 0;
 			}
-			else
+			else if (v[i][j+1] > v[i-1][j] and v[i][j+1] > v[0][j])
 			{
-				//cout << "No! here " << endl;
 				vec.push_back(i);
 				vec.push_back(j+1);
 				vec.push_back(v[i][j+1]);
+				v[i][j] = 0;
+			}
+			else if (v[0][j] > v[i][j+1] and v[0][j] > v[i-1][j])
+			{
+				vec.push_back(0);
+				vec.push_back(j);
+				vec.push_back(v[0][j]);
 				v[i][j] = 0;
 			}
 			return vec;
@@ -101,14 +105,23 @@ int search(vector< vector<int> > &v1, int row, int col)
 		cout << "Starting with Row: " << i << endl;
 		int c_row = i;
 		int c_col = 0;
+		cout << c_row << " " << c_col << endl;
+		if (v[c_row][c_col] == -1)
+			continue;
+		else
+		{
 		int sum = v[c_row][c_col];
 		vector<int> step;
 		while(c_col != col-1)
 		{
+			int prev_row = c_row;
 			step = findbest(v,c_row,c_col,row,col);
 			c_row = step[0];
 			c_col = step[1];
-			sum = sum + step[2];
+			if (((prev_row - c_row) == row-1) or ((c_row - prev_row) == row-1))
+				sum = 0;
+			else
+				sum = sum + step[2];
 			cout << c_row << " " << c_col << endl;
 		}
 		
@@ -130,8 +143,9 @@ int search(vector< vector<int> > &v1, int row, int col)
 		}
 		cout << "sum1: " << sum1 << endl;
 		cout << "sum2: " << sum2 << endl;
+		}
 	}
-	//cout << "sum: " << sum << endl;
+	
 }
 
 int main()
