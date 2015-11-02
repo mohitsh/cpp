@@ -1,7 +1,13 @@
 
 #include <iostream>
+#include <algorithm>
+#include <deque>
 #include <string>
+#include <stack>
+#include <cstdlib>
 #include <vector>
+#include <list>
+#include <iomanip>
 
 using namespace std;
 
@@ -250,9 +256,10 @@ int search(vector< vector<int> > &v1, int row, int col, bool flag)
 	return max;
 }
 int main()
+{
 
 	int n,m;
-	//cout << "rows and columns: ";
+	cout << "rows and columns: ";
 	cin >> n >> m;	
 	vector< vector<int> > v;
 	
@@ -281,12 +288,10 @@ int main()
 	int ans1 = search(v,n,m,0);
 	//cout << "No crossing: " << endl;
 	int ans2 = search(v,n,m,1);
-	if (ans1 > ans2 and ans1 !=0 )
+	if (ans1 > ans2)
 		cout << ans1 << endl;
-	else if (ans2 > ans1 and ans2 != 0)
+	else
 		cout << ans2 << endl;
-	else 
-		cout << -1 << endl;
 	return 0;
 }
 

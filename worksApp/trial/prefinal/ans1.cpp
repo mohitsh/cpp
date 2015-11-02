@@ -250,7 +250,7 @@ int search(vector< vector<int> > &v1, int row, int col, bool flag)
 	return max;
 }
 int main()
-
+{
 	int n,m;
 	//cout << "rows and columns: ";
 	cin >> n >> m;	
