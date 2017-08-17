@@ -1,4 +1,4 @@
-Merging two already sorted Linked List
+Merging two already sorted Linked List (Method2)
 1. insertNodeAtBack() adds new nodes 
 2. mergeSortedLL() merges both linked list
 3. displayL() prints the LinkedList data
