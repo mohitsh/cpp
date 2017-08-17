@@ -11,6 +11,7 @@ struct node
 	node *next;
 };
 
+
 node *insertNodeAtBack(node *, int n);
 node *mergeSortedLL(node*, node*);
 node *appendNode(node *, int);
@@ -26,9 +27,11 @@ int main()
 	cout << "currently head2 is pointed at: " << head2->data << endl;
 	mergedLL = mergeSortedLL(head1, head2);
 
-	
+	cout << "LL1: " << endl;	
 	displayLL(head1);
+	cout << "LL2: " << endl;
 	displayLL(head2);
+	cout << "merged LL: " << endl;
 	displayLL(mergedLL);
 	return 0;
 }
@@ -121,9 +124,17 @@ node *mergeSortedLL(node* head1, node* head2)
 	while(head1 && head2)
 	{
 		if (head1->data > head2->data)
+		{
+			head = appendNode(head, head2->data);
 			head = appendNode(head, head1->data);
+
+		}		
 		else
+		{
+			head = appendNode(head, head1->data);
 			head = appendNode(head, head2->data);	
+
+		}
 		head1 = head1->next;
 		head2 = head2->next;
 	}
