@@ -1,0 +1,84 @@
+#include<iostream>
+#include<iomanip>
+
+
+using namespace std;
+
+struct node
+{
+	int data;
+	node *next;
+};
+
+node *insertNodeAtBack(node *);
+void display(node *);
+node *checkPalindrome(node *);
+
+
+int main()
+{
+	node *head;
+	head = NULL;
+	head = insertNodeAtBack(head);
+	display(head);
+	head = checkPalindrome(node head);
+}
+
+node *insertNodeAtBack(node *head)
+{
+
+	int n;
+	cout << "enter number of nodes: ";
+	cin >> n;
+
+	for (int i = 0; i<n; ++i)
+	{
+		int new_data;
+		cout << "enter node value: " << i+1 << ": ";
+		cin >> new_data;
+		node *temp;
+		temp = new node;
+		temp->data = new_data;
+		
+		if (head == NULL)
+		{
+			temp->next = head;
+			head = temp;
+		}	
+		else
+		{
+			node *traver;
+			traver = head;
+			while(traver->next!=NULL)
+				traver = traver->next;
+			temp->next = traver->next;
+			traver->next = temp;
+		}
+	}
+	return head;
+}
+
+node *checkPalindrome(node *)
+{
+	int n = 0;
+	node *traver;
+	traver = head;
+	while(traver != NULL)
+	{
+		n += 1;
+		traver = traver->next;
+	}
+	cout << "size " << endl;
+	return head;
+
+}
+
+
+void display(node *head)
+{
+	while(head!=NULL)
+	{
+		cout << head->data << endl;
+		head = head->next;
+	}
+}
