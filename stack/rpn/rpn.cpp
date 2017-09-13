@@ -15,62 +15,51 @@ double mult(double, double);
 int main()
 {
 
-	vector<string> expr;
-	Stack s;
-  //expr = {"3", "4", "+", "2", "*", "1", "+"};
-  //expr = {"4", "2", "5", "*", "+", "1", "3", "2", "*", "+", "/"};
-  //expr = {"2", "1", "+", "3", "*"};
+  vector<string> expr;
+  Stack s;
+
+  /* example rpn expression */
+  expr = {"3", "4", "+", "2", "*", "1", "+"};
+  expr = {"4", "2", "5", "*", "+", "1", "3", "2", "*", "+", "/"};
+  expr = {"2", "1", "+", "3", "*"};
   expr = {"4", "13", "5", "/", "+"};
+  /* ENDS */
+
+
+  expr = {"3", "4", "+", "2", "*", "1", "+"};
   vector<string> operators;
   operators = {"+", "-", "*", "/"};
 
-	vector<string>::iterator itr;
+  vector<string>::iterator itr;
   double a, b, result;
-	for(itr = expr.begin(); itr != expr.end(); ++itr)
+  for(itr = expr.begin(); itr != expr.end(); ++itr)
+  {
+    	auto present = find(operators.begin(), operators.end(), *itr);
+    	if (present == operators.end()){ // data detected  
+      		int data = stoi(*itr);   // convert string to int
+      		data = (double) data;    // convert int to double
+      		s.push(data);
+    	}
+    	else                             // operator detected
 	{
-    cout << "processing: " << *itr << endl;
-    auto present = find(operators.begin(), operators.end(), *itr);
-    if (present == operators.end()){
-      int data = stoi(*itr);
-      data = (double) data;
-      s.push(data);
-    }
-    else{
-      string oper = *itr;
-      cout << "processing operator: " << oper << endl;
-      // its operator then pop two times and take the two operands
-      a = s.pop();
-      b = s.pop();
-      cout << "iterator: " << oper << " a: " << a << " b: " << b << endl;
-      if (!oper.compare("+"))
-      {
-        cout << "calling add: " << endl;
-        result = addi(a, b);
-        cout << "called add: " << result << endl;
-      }
-      else if (!oper.compare("-"))
-      {
-        cout << "calling minus: " << endl;
-        result = subt(a, b);
-        cout << "called minus: " << result << endl;
-      }
-      else if (!oper.compare("*"))
-      {
-        cout << "calling multiply: " << endl;
-        result = mult(a, b);
-        cout << "called multiply: " <<  result << endl;
-      }
-      else if (!oper.compare("/"))
-      {
-        cout << "calling division: " << endl;
-        result = divi(b, a); // sequence is important here
-        cout << "called division: " << result << endl;
-      }
-      s.push(result);
-    }
-	}
-
-
+		/* if operator detected pop stack twice compute result and then
+		 * push the result on to stack
+		 * */
+      		string oper = *itr;
+      		a = s.pop();
+      		b = s.pop();
+      		if (!oper.compare("+"))
+		        result = addi(a, b);
+      		else if (!oper.compare("-"))
+		        result = subt(a, b);
+	      	else if (!oper.compare("*"))
+		        result = mult(a, b);
+	        else if (!oper.compare("/"))
+		        result = divi(b, a); // sequence is important here
+	        s.push(result);
+    	}
+ }
+  cout << "final result: " << result << endl;
 }
 
 double addi(double a, double b)
