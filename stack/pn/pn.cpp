@@ -18,27 +18,15 @@ int main()
   vector<string> expr;
   Stack s;
 
-  /* example rpn expression 
-
-  expr = {"3", "4", "+", "2", "*", "1", "+"};
-  expr = {"4", "2", "5", "*", "+", "1", "3", "2", "*", "+", "/"};
-  expr = {"2", "1", "+", "3", "*"};
-  expr = {"4", "13", "5", "/", "+"};
-  expr = {"3", "4", "+", "2", "*", "1", "+"};
-  expr = {"15","7","1","1","+","-","/","3","*","2","1","1","+","+","-"};
-
-  ENDS */
-
-  expr = {"1","1","+","2","+","3","1","1","+","7","-","15","/","*","-"};
+  expr = {"-","*","/","15","-","7","+","1","1","3","+","2","+","1","1"};
 
   vector<string> operators;
   operators = {"+", "-", "*", "/"};
 
-  vector<string>::iterator itr;
-  //vector<string>::iterator itr;
+  vector<string>::reverse_iterator itr;
 
   double a, b, result;
-  for(itr = expr.begin(); itr != expr.end(); ++itr)
+  for(itr = expr.rbegin(); itr != expr.rend(); ++itr)
   {
     	auto present = find(operators.begin(), operators.end(), *itr);
     	if (present == operators.end()){ // data detected  
