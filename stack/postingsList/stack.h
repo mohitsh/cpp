@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include "node.h"
 
 using namespace std;
 
@@ -9,33 +10,33 @@ class Stack
 {
   int top = -1;
 public:
-  string a[MAX];
-  string pop();
-  bool push(string x);
+  node* a[MAX];
+  node* pop();
+  bool push(node* x);
   bool isEmpty();
 };
 
 
-string Stack::pop()
+node* Stack::pop()
 {
   if (top < 0)
   {
-    cout << "stack underflow!";
+    //cout << "stack underflow!";
     return 0;
   }
   else
   {
-    string elem = a[top];
+    node* elem = a[top];
     top -= 1;
     return elem;
   }
 }
 
-bool Stack::push(string elem)
+bool Stack::push(node* elem)
 {
   if (top >= MAX)
   {
-    cout << "stack overflow!";
+    //cout << "stack overflow!";
     return false;
   }
   else

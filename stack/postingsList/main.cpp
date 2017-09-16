@@ -1,27 +1,76 @@
+#include<vector>
 #include "stack.h"
-
-struct node
-{
-    int data;
-    node *next;
-    node *jump;
-};
+#include<algorithm>
 
 void displayLL(node*);
 node *createLL();
-node *traverseOrder(node*);
+vector<node*>traverseOrder(node*);
 
 int main()
 {
+    
     node *head = createLL();   
-    displayLL(head); 
-    node *result = traverseOrder(head);
-
+    //displayLL(head); 
+    
+    vector<node*> nodeOrder;
+    nodeOrder = traverseOrder(head);
+    
+    cout << "Final Traversal Order: " << endl;
+    vector<node*>::iterator itr;
+    for(itr = nodeOrder.begin(); itr != nodeOrder.end(); ++itr)
+        cout << (*itr)->data << " -> ";
+    cout << endl;
 }
 
-node *traverseOrder(node* head)
+vector<node*> traverseOrder(node* head)
 {
+    Stack s; 
+    vector<node*> nodeOrder;
+    node *traver;
+    traver = new node;
+    traver = head;
+
+    while(traver != NULL)
+    {
+        cout << "Processing: " << traver->data << endl;
+        // if curent node not in vector then add it
+        auto nodePresent = find(nodeOrder.begin(), nodeOrder.end(), traver);
+        if(nodePresent == nodeOrder.end())
+        {
+            cout << "Node: " << traver->data << "  is not present and being added." << endl;
+            nodeOrder.push_back(traver);
+        }
+
+        // make sure its not the last node
+        if (traver->next != NULL)
+        {
+            cout << "Next node is:  " << traver->next->data << " pushed to stack " << endl;
+            s.push(traver->next);
+        }
+
+        if (traver->jump != NULL)
+        {
+            cout << "Jump node is:  " << traver->jump->data << " pushed to stack "<< endl;
+            s.push(traver->jump);
+        }
+
+        while(!s.isEmpty())
+        {
+            node *poppedNode = s.pop();
+            cout << "Popped node " << poppedNode->data << endl;
+            nodePresent = find(nodeOrder.begin(), nodeOrder.end(), poppedNode); 
+            if (nodePresent == nodeOrder.end())
+            {
+                cout << "Adding node " << poppedNode->data << " to the vector " << endl;
+                nodeOrder.push_back(poppedNode);
+            }
+        }
+
+        //cout << traver->data << endl;
+        traver = traver->next;
+    }
     
+    return nodeOrder;     
 }
 
 
