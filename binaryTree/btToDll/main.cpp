@@ -4,7 +4,8 @@
 
 using namespace std;
 
-void printInOrder(node *);
+//void printInOrder(node *);
+node* printInOrder(node *);
 
 node *createBinaryTree();
 vector<node*> createDLL(node *, node*);
@@ -14,14 +15,12 @@ int main()
   node *root;
   root = new node;
 
+  node *new_node;
+  new_node = new node;
+
   root = createBinaryTree();
-  printInOrder(root);
+  new_node = printInOrder(root);
 
-  node *head;
-  head = NULL;
-
-  vector<node*> storedNodes;
-  //storedNodes = createDLL(head, root);
 
   return 0;
 }
@@ -43,46 +42,20 @@ node *createBinaryTree()
   return root;
 }
 
-void printInOrder(node *root)
+node* printInOrder(node *root)
 {
-  vector<node*> storage;
 
-
-  if (root == NULL)
-    return;
+  if ((root->left == NULL) || (root->right == NULL))
+    {
+      //cout << "leaf node: " << root->data << endl;
+      return root;
+    }
   printInOrder(root->left);
-  cout << root->data << endl;
-  storage.push_back(root);
+  cout << "current root: " << root->data << endl;
+  //return root;
   printInOrder(root->right);
+  cout << "current root: " << root->data << endl;
 
-  int size = storage.size();
-  vector<node*>::iterator itr;
 
-  node *head;
-  head = NULL;
-
-  head = storage[0];
-  for(int i = 0; i<size; ++i)
-  {
-    if (i != size-1)
-      storage[i]->right = storage[i+1];
-    if (i != 0)
-      storage[i+1]->left = storage[i];
-  }
-
-   // traversing the DLL
-
-  int count = 0;
-  node *traver = head;
-  while(count < size)
-  {
-    if (count == 0)
-      cout << "current node: " << traver->data << " right: " << traver->right->data << endl;
-    else if (count == size-1)
-      cout << "current node: " << traver->data << " left: " << traver->left->data << endl;
-    else
-      cout << "current node: " << traver->data << " left: " << traver->left->data << "right: " << traver->right->data << endl;
-
-}
 }
 
