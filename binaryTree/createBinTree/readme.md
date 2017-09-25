@@ -1,4 +1,4 @@
-
+#### Example binary tree
 
                                 314
                   _______________________________
@@ -11,3 +11,14 @@
                          17               401      257
                                           ______
                                              641
+
+
+
+Functions inside main.cpp
+* insert(node*, int)    -> insert node at appropriate positionin BST
+* printInorder(node *)  -> print BST inOrder traversal
+* TreeSize(node *)      -> give total number of nodes in tree
+* MaxDepth(node *)      -> Maximum Depth of any leaf of BST
+* minValue(node *)      -> Minimum value node of BST
+* mirror(node *)        -> mirror image of BST
+* doubleTree(node *)    -> insert duplicate of node to its left 
