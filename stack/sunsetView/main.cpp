@@ -6,7 +6,7 @@ Stack findBuildings(vector<double>);
 int main()
 {
     vector<double> v = {80, 60, 100, 40, 30, 10, 70, 50, 20}; 
-    v = {10, 20, 30, 40, 50, 60, 50, 40, 30, 20, 10};
+    //v = {10, 20, 30, 40, 50, 60, 50, 40, 30, 20, 10};
     
     Stack BuildingSequence;
     BuildingSequence = findBuildings(v);
