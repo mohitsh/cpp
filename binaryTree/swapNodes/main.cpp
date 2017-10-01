@@ -1,77 +1,91 @@
 #include<iostream>
-#include"binarytree.h"
+#include<map>
 
 using namespace std;
 
 
+struct node
+{
+    int data;
+    node *left;
+    node *right;
+};
+
+struct node *newNode(int data)
+{
+    node *new_node;
+    new_node = new node;
+    new_node->data =data;
+    new_node->left = NULL;
+    new_node->right = NULL;
+
+    return new_node;
+};
+
 node *insert(node *, int);
 void printInOrder(node*);
-int TreeSize(node *); 
-int MaxDepth(node *);
-int minValue(node *);
 void mirror(node *);
-void doubleTree(node *);
-void depthPrint(node *, int, int);
+void search(node *, int, int, int);
+void swapNodes(node *, int, int);
 
 int main()
 {
+    map<int, node*> storage;
+
 
     node *root;
+    node *nn; 
     root = new node;
-    //root = newNode(314);
-    root = newNode(1);
 
-    root->left = newNode(2);
-    root->left->left = newNode(4);
-    root->left->left->left = newNode(6);
-    root->left->left->left->right = newNode(9);
+    nn = newNode(1);
+    storage[1] = nn;
+    root = nn;
 
-    root->right = newNode(3);
-    root->right->left = newNode(5);
-    root->right->left->left = newNode(7);
-    root->right->left->right = newNode(8);
-    root->right->left->right->left = newNode(10);
-    root->right->left->right->right = newNode(11);
-
-
-    /*
     int n;
-    cout << "enter no of nodes: ";
     cin >> n; 
 
-    for (int i = 0; i<n; ++i)
+    for (int i = 1; i<=n; ++i)
     {
-        int data;
-        cout << "enter node " << i+1 << " value: "; 
-        cin >> data;
-        root = insert(root, data);
-    } 
-    */
+        node *nn1;
+        int a, b;
+        cin >> a >> b;
+        node *in = storage[i];  // insertionNode -> in
 
-    
-    printInOrder(root);
-    int k = 3;
-    depthPrint(root, 1, k-1);
-    cout << "after reversal: " << endl;
+        if (a == -1) in->left = NULL;
+        else
+        {
+            nn1 = newNode(a);
+            storage[a] = nn1; 
+            in->left = nn1;
+        }
+
+        if (b == -1) in->right = NULL;
+        else
+        {
+            nn1 = newNode(b);
+            storage[b] = nn1;
+            in->right = nn1;
+        }
+
+    } 
+
+    //search(root, 2, 3, -1);
     printInOrder(root);
     cout << endl;
+
+    int k;
+    cin >> k;
+    for (int i = 0; i<k; ++i)
+    {
+        int val;
+        cin >> val;
+        swapNodes(root, 1, val);
+        printInOrder(root);
+        cout << endl;
+    }
     return 0;
 }
 
-
-node *insert(node *node, int data)
-{
-    if (node == NULL)
-        return newNode(data);
-    else
-    {
-        if (data >= node->data)
-           node->right = insert(node->right, data);
-        else
-           node->left = insert(node->left, data);
-        return node;
-    }
-}
 
 
 /* IN ORDER PRINTING */
@@ -80,94 +94,23 @@ void printInOrder(node *root)
     if (root == NULL)
         return;
     printInOrder(root->left);
-    cout << root->data << " -> ";
+    cout << root->data << " ";
     printInOrder(root->right);
 }
 
-int TreeSize(node *root)
-{ 
-    if (root == NULL)
-        return 0;
-    else
-        return(1 + TreeSize(root->left) + TreeSize(root->right));
-}
-
-
-int MaxDepth(node *root)
-{
-    if (root == NULL)
-        return 0;
-
-    int lDepth = MaxDepth(root->left);
-    int rDepth = MaxDepth(root->right);
-
-    if (lDepth>rDepth)
-       return 1+lDepth;
-    else
-        return 1+rDepth;
-
-}
-
-int minValue(node *root)
-{
-
-    /*  considering it is a binary search tree */
-
-    node *temp;
-    temp = root;
-    while(temp->left != NULL)
-        temp = temp->left;
-
-    return temp->data;
-}
-
-void mirror(node *root)
+void swapNodes(node *root, int c, int k)
 {
     if (root == NULL)
         return;
-    else
-    {
-        mirror(root->left);
-        mirror(root->right);
-        
-        node *temp;
-        temp = new node;
-        temp = root->left;
-        root->left = root->right;
-        root->right = temp;
-    } 
-}
-
-void doubleTree(node *root)
-{
-    if (root == NULL) return;
-    else
-    {
-        doubleTree(root->left);
-        doubleTree(root->right);
-
-        node *temp;
-        temp = root->left;
-        root->left = newNode(root->data);
-        root->left->left = temp;
-    }
-}
-
-
-void depthPrint(node *root, int c, int k)
-{
-    if (root == NULL) return;
-    if (c == k)
+    if ((c%k) == 0)
     {
         node *temp;
         temp = root->left;
         root->left = root->right;
         root->right = temp;
-        printInOrder(root);
     }
-    cout << endl;
-    c += 1;
-    depthPrint(root->left, c, k);
-    depthPrint(root->right, c, k);
-
+    c +=1;
+    swapNodes(root->left, c, k);
+    swapNodes(root->right, c, k);
 }
+
