@@ -34,33 +34,44 @@ void printGraph(vector< pair<int, int> > adjList[], int V)
 void bfs(vector <pair<int, int> > adjList[], int n, int start)
 {
 
-  bool visited[n];
+  bool discovered[n];
+  vector<int> parents(n);
   list<int> queue;
 
+  // initially all the nodes are undiscovered
   for (int i = 0; i<n; ++i)
-    visited[i] = false;
+  {
+    discovered[i] = false;
+    parents[i] = -1;
+  }
 
-  visited[start] = true;
+  // set first node as discovered
+  discovered[start] = true;
+
+  // add it for processing
   queue.push_back(start);
 
-  list<int>::iterator i;
-  
   while(!queue.empty())
   {
-
+    // node being processed
     int s = queue.front();
     cout << s << " ";
     queue.pop_front();
 
+    // mark all the adjacent nodes as visited
     for (auto it = adjList[s].begin(); it != adjList[s].end(); ++it)
     {
-      if (!visited[it->first])
+      if (!discovered[it->first])
       {
-        visited[it->first] = true;
+        discovered[it->first] = true;
         queue.push_back(it->first);
+        parents.insert(parents.begin() + it->first, s);
       }
     }
   }
+
+  for (int i = 0; i<n; ++i)
+      cout << "parent of " << i << " is : " << parents[i] << endl;
    
 }
 
@@ -105,7 +116,7 @@ int main()
     printGraph(adjList, n);
     cout << "BFS: " << endl;
     bfs(adjList, n, 1);
-    cout << "DFS: " << endl; 
+    cout << endl << "DFS: " << endl; 
     dfs(adjList, n, 1);
     cout << endl;
     return 0;
