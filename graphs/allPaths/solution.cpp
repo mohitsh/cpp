@@ -21,9 +21,6 @@ int totalPath(map <int, vector< vector<int> > > g, int n, int start, int b)
     while(!q.empty())
     {
         vector<int> fe = q.front(); // take first path for processing
-        //cout << "front" << endl;
-        //for (auto it1 = fe.begin(); it1 != fe.end(); ++it1)
-            //cout << (*it1) << endl;
         vector<int>::iterator vecIt;
         q.pop(); // remove the same
 
@@ -32,12 +29,9 @@ int totalPath(map <int, vector< vector<int> > > g, int n, int start, int b)
         vector< vector<int> > adjList;
         adjList = g[last_elem];
 
-        //cout << "current soruce: " << last_elem << endl;
         for (auto it = adjList.begin(); it != adjList.end(); ++it)
         {
             int node = (*it)[0];
-            //cout << "neighbor: " << node << endl;
-            // void loops
             if (node == b)
             {
                 vector<int> new_arr = fe;
@@ -58,7 +52,6 @@ int totalPath(map <int, vector< vector<int> > > g, int n, int start, int b)
             }
        }
     }
-    cout << paths.size() << endl;
 
     for (int i = 0; i < paths.size(); ++i)
     {
@@ -67,7 +60,8 @@ int totalPath(map <int, vector< vector<int> > > g, int n, int start, int b)
             cout << paths[i][j] << " ";
         cout << endl;
     }
-    return 0;
+    int path_count = paths.size();
+    return path_count;
 }
 
 
@@ -83,10 +77,11 @@ void addEdge(map <int, vector< vector<int> > > &g, int a, int b, int w)
         adjList = g[a];
         found = false;
 
-        for (it = adjList.begin(); it != adjList.end(); ++it)
+        // allow for multiple edges b/w nodes
+        /*for (it = adjList.begin(); it != adjList.end(); ++it)
             if ((*it)[0] == b) found = true;
 
-        if (found == false)
+        if (found == false)*/
             g[a].push_back(edge);
 
 }
@@ -113,25 +108,33 @@ void printGraph(map <int, vector< vector<int> > > &g)
 
 int main()
 {
-    map <int, vector< vector<int> > > g;
 
-    int v, e, s, d;
-    cin >> v >> e;
-    cin.ignore();
-    string rawInput;
-    string buff;
-    vector<int> node_store;
 
-    getline(cin, rawInput);
-    stringstream ss(rawInput);
-    while(ss >> buff)
-     node_store.push_back(stoi(buff));
-
-    for (int i = 0; i<node_store.size(); i = i+2)
-        addEdge(g, node_store[i], node_store[i+1], 0);
-
+    int n;
+    cin >> n; 
     cin.clear();
-    cin >> s >> d;
-    int ans = totalPath(g, v, s, d);
-    //printGraph(g);
+    for (int j = 0; j<n; ++j)
+    {
+        map <int, vector< vector<int> > > g;
+        int v, e, s, d;
+        cin >> v >> e;
+        cin.ignore();
+        string rawInput;
+        string buff;
+        vector<int> node_store;
+
+        getline(cin, rawInput);
+        stringstream ss(rawInput);
+        while(ss >> buff)
+         node_store.push_back(stoi(buff));
+
+        for (int i = 0; i<node_store.size(); i = i+2)
+            addEdge(g, node_store[i], node_store[i+1], 0);
+
+        cin.clear();
+        cin >> s >> d;
+        int ans = totalPath(g, v, s, d);
+        cout << ans << endl;
+    }
+
 }

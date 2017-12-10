@@ -23,7 +23,6 @@ int main()
     root->left->left->left = newNode(28);
     root->left->left->right = newNode(0);
 
-
     root->left->right->right = newNode(3);
     root->left->right->right->left = newNode(17);
 

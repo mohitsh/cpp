@@ -27,7 +27,6 @@ int main(){
     }
 
      
-    return 0;
 }
 
 void processor(vector<int> &a, vector<int> &b, int x)
@@ -41,35 +40,38 @@ void processor(vector<int> &a, vector<int> &b, int x)
     for (i = b.rbegin(); i != b.rend(); ++i)
         s2.push(*i);
 
-    int score1 = score2 = 0;
-    while (s < x)
+    int score(0);
+    while (sum < x)
     {
         int top1, top2, extra1, extra2, popped;
-        top1 = s1.top();
-        top2 = s2.top();
+        if (!s1.empty())
+            top1 = s1.top();
+        if (!s2.empty())
+            top2 = s2.top();
 
-        if (top1 < top2) 
+        if (top1 <= top2 && !s1.empty()) 
         {
             sum += top1;
             s1.pop(); 
-            score1 += 1;
-            score2 += 1;
-
-        }
-
-        else if (top2 < top1)
-        {
-            sum += top2;
-            s2.pop();
-            score1 += 1;
-            score2 += 1;
+            //cout  << "popping: " << top1 << endl;
+            score += 1;
         }
 
         else
         {
-            sum += top1; 
-            
+            if (!s2.empty())
+            {
+                sum += top2;
+                s2.pop();
+            //cout << "popping: " << top2 << endl;
+            score += 1;
+            }
         }
-    }
 
+    //cout << "final sum: " << sum << " x: " << x << " score: " << score << endl;
+    }
+    if (sum > x)
+        cout << score-1 << endl; 
+    else
+        cout << score << endl;
 }
