@@ -32,7 +32,8 @@ struct node* newNode(int data)
 
 
 node *insert(node *, int);
-void printInOrder(node*);
+void printInOrder(node*, int);
+int runbfs(node *);
 
 
 int main()
@@ -74,8 +75,10 @@ int main()
 
     }
     
-    printInOrder(root);
-    cout << endl;
+    int depth = runbfs(root);
+
+    printInOrder(root, depth);
+
     return 0;
 }
 
@@ -90,20 +93,49 @@ node *insert(node *node, int data)
 }
 
 
-void printInOrder(node *root)
+void printInOrder(node *root, int depth)
 {
     if (root == NULL)
         return;
     
-    printInOrder(root->left);
-    cout << root->data << " ";
-    printInOrder(root->right); 
+    printInOrder(root->left, depth);
+    cout << root->data << " height: " << depth - root->ht << endl;
+    printInOrder(root->right, depth); 
 }
 
-
-void runbfs(node *root)
+int runbfs(node *root)
 {
-    queue q;    
-     
+    /*
+     assigns depth to each node 
+     it is store in node->ht
 
+     returns maximum depth
+
+    */
+    queue<node*> q;
+    int depth;    
+    node *origin = root;
+    origin->ht = 0;
+    while(origin != NULL)
+    {
+      cout << origin->data << endl;
+      if (origin->left != NULL)
+      {
+        node *leftChild = origin->left;
+        leftChild->ht = origin->ht + 1;
+        leftChild->parent = origin;
+        q.push(leftChild);
+      }
+      if (origin->right != NULL)
+      {
+        node *rightChild = origin->right;
+        rightChild->ht = origin->ht + 1;
+        rightChild->parent = origin;
+        q.push(rightChild);
+      }
+      depth = origin->ht;
+      origin = q.front();
+      q.pop();
+    }
+    return depth;
 }
