@@ -49,7 +49,8 @@ int main()
   cout << endl;
 
 
-  cout << "balanced or not: " << isBalanced(root) << endl;
+  cout << "balanced or not [1: yes, 0: not]: " << isBalanced(root) << endl;
+  cout << "height of tree: " << height(root) << endl;
 }
 
 void inOrder(node *root)

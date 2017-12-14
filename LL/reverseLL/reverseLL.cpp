@@ -12,6 +12,7 @@ struct node
 node *insertNodeAtBack(node *);
 void displayLL(node *);
 node *reverseLL(node *);
+node *recurReverse(node *);
 
 int main()
 {
@@ -20,7 +21,9 @@ int main()
 	head = NULL;
 	head = insertNodeAtBack(head);
 	//displayLL(head);
-	head = reverseLL(head);
+	//head = reverseLL(head);
+        head = recurReverse(head);
+        cout << "reversed List: " << endl;
 	displayLL(head);
 }
 
@@ -89,5 +92,18 @@ node *reverseLL(node *head)
 
 }
 
+
+node *recurReverse(node *head)
+{
+  if (head->next == nullptr) return head;
+
+  node *new_head = recurReverse(head->next);
+
+  head->next->next = head;
+  head->next = nullptr;
+
+  return new_head;
+
+}
 
 
