@@ -9,12 +9,10 @@ using namespace std;
 int min(int a, int b, int c)
 {
 
-    int min;
+   int min;
 
    min = (a<b) ? a : b; 
-
    min = (min < c) ? min : c;
-
    return min;
 }
 
@@ -25,7 +23,13 @@ void editDistance(string s1, string s2)
     l1 = s1.size();
     l2 = s2.size();
 
-    int mat[l1+1][l2+1];
+    static int mat[1000][1000];
+
+    for (int i = 0; i<=l1; ++i)
+    {
+        for (int j = 0; j<=l2; ++j)
+            mat[i][j] = 0;
+    }
 
     // initialize first row from 0 to l2-1;
     
@@ -63,14 +67,14 @@ void editDistance(string s1, string s2)
     }
 
     // utility to print final matrix
-    /*
-    for (int i = 0; i<=l1; ++i)
+    
+    /*for (int i = 0; i<=l1; ++i)
     {
         for (int j = 0; j<=l2; ++j)
             cout << mat[i][j] << " ";
         cout << endl;
-    }
-    */
+    }*/
+    
     cout << mat[l1][l2] << endl;
     
 }
