@@ -26,11 +26,9 @@ struct node *newNode(int data)
 
 void printInOrder(node*);
 void printRevInOrder(node*);
-bool checkBST(node*);
-int findBST(node*, int, int);
-int isBst(node *);
-int performBst(node *);
-
+int isBST(node *);
+int minValue(node *);
+int maxValue(node *);
 
 vector<int> store;
 
@@ -50,7 +48,7 @@ int main()
     root->right = newNode(12);
 
     root->left->left = newNode(4);
-    root->left->right = newNode(13);
+    root->left->right = newNode(9);
 
     //root->right->left = newNode(5);
     //root->right->right =  newNode(18);
@@ -61,7 +59,7 @@ int main()
     //bool ans = checkBST(root);
     //cout << ans << endl;
     
-    cout  << "isBst [1]: yes [0]: no => " << isBst(root) << endl;
+    cout  << "isBst [1]: yes [0]: no => " << isBST(root) << endl;
     cout << "after RevInOrder: " << endl;
     printRevInOrder(root);
     cout << endl;
@@ -95,39 +93,39 @@ void printRevInOrder(node *root)
 }
 
 
-
-bool checkBST(node *root)
+int minValue(node *head)
 {
-    return findBST(root, INT_MIN, INT_MAX);
+
+  if (head == nullptr) return 0;
+
+  while(head->left != nullptr) head = head->left;
+  return head->data;
 }
 
-int findBST(node *root, int min, int max)
+int maxValue(node *head)
 {
-    if (root == NULL) return true;
-    if ((root->data < min) || (root->data > max)) return false;
-    return (findBST(root->left, min, root->data) && 
-            findBST(root->right, root->data+1, max)); 
+  if (head == nullptr) return 0;
+  
+  while(head->right != nullptr) head = head->right;
+  return head->data;
+
+}
+
+int isBST(node *head)
+{
+  // the essential condition of tree
+  if (head == nullptr) return 1; 
+
+  if (head->left != nullptr &&
+      maxValue(head->left) > head->data) return 0;
+
+  if (head->right != nullptr &&
+      minValue(head->right) < head->data) return 0;
+
+  if (!isBST(head->left) || !isBST(head->right)) return 0;
+
+  return 1;
+
 }
 
 
-int performBst(node *root)
-{
-  if (root == nullptr) return 1;
-
-  if ((root->left == nullptr) &&
-      (root->right == nullptr))
-      return 1;
-
-  else if (root->left && 
-      root->right &&
-      (root->data >= root->left->data) &&
-      (root->data <= root->right->data)) 
-      return 1;
-  else return 0; 
-}
-
-int isBst(node *root)
-{
-  return (performBst(root->left) && performBst(root->right));
-
-}

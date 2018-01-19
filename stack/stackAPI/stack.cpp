@@ -10,7 +10,11 @@ class Stack
         int top; // counter to keep track of stack elements
 
 public:
-        Stack(){top = -1;} // initially no element (underflow)
+        Stack()  // initially no element (underflow)
+        {
+          top = -1;
+        }         
+
         int a[MAX];        // static array 
         int pop();
         bool isEmpty();

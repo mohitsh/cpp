@@ -24,7 +24,6 @@ node *newNode(int payload){
 void inOrder(node *);
 void pathToLeaf(node *);
 int max(int, int);
-int height(node *);
 int treeSize(node *);
 int maxDepth(node *);
 int hasPathSum(node *, int);
@@ -64,10 +63,10 @@ int main()
   pathToLeaf(root);
   int size = treeSize(root);
 
-  cout << "size: " << size << endl;
-  cout << "maximum depth: " << maxDepth(root) << endl;
+  //cout << "size: " << size << endl;
+  //cout << "maximum depth: " << maxDepth(root) << endl;
 
-  cout << "pathSumPresen [1]: yes, [0]: no  => " << hasPathSum(root, 23) << endl;
+  //cout << "pathSumPresen [1]: yes, [0]: no  => " << hasPathSum(root, 23) << endl;
 
   printPaths(root);
 
