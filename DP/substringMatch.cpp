@@ -16,7 +16,7 @@ int min(int a, int b, int c)
    return min;
 }
 
-void editDistance(string s1, string s2)
+void matchSubString(string s1, string s2)
 {
 
     int l1, l2;
@@ -34,7 +34,7 @@ void editDistance(string s1, string s2)
     // initialize first row from 0 to l2-1;
     
     for (int j = 0; j<=l2; ++j)
-        mat[0][j] = j;
+        mat[0][j] = 0;
 
     // initialize first col from 0 to l1-1;
     
@@ -46,13 +46,11 @@ void editDistance(string s1, string s2)
     {
         for (int j = 1; j<=l2; ++j)
         {
-            /* we are taking string index from 0 
+            /* we are taking string index from 1 
              * so since first row and column of mat is dedicated for base cases
-             * we have to shift i and j by one 
+             * we have to start from 1
              *
-             * i -> i+1 and j -> j+1
-             *
-             * if you follow this ^ code below will look normal
+             * Hence string indexing will require i-1 and j-1 since they start from 0
              * */
 
             int left = mat[i-1][j]; // cost of insert 
@@ -75,8 +73,20 @@ void editDistance(string s1, string s2)
         cout << endl;
     }*/
     
-    cout << mat[l1][l2] << endl;
-    
+    int i = l1;
+    int j = 0;
+
+    for (int k = 1; k<l2; ++k)
+    {
+        if (mat[i][k] < mat[i][j]) j = k;
+    }
+
+    //cout << "i: " << i << " j: " << j << endl;
+    if (j == 0) 
+        cout << "substring not found" << endl;
+    else
+        cout << mat[i][j] << endl;
+   
 }
 
 int main()
@@ -87,7 +97,8 @@ int main()
     cout << s1 << endl;
     cout << s2 << endl;
 
-    editDistance(s1, s2);
+    // s2.size() > s1.size()
+    matchSubString(s1, s2);
 
     return 0;
 }
