@@ -4,13 +4,11 @@
 using namespace std;
 
 
-node *insert(node *, int);
+void insert(node * &, int);
 void printInOrder(node*);
 
 int main()
-{
-
-    node *root;
+{ /*node *root;
     root = new node;
     root = newNode(314);
 
@@ -34,44 +32,41 @@ int main()
     root->right->left->right->right = newNode(257);
     root->right->left->right->left->right = newNode(641);
 
-    root->right->right->right = newNode(28);
+    root->right->right->right = newNode(28);*/
 
-    //int n;
-    //cout << "enter no of nodes: ";
-    //cin >> n; 
+    int n;
+    cout << "enter no of nodes: ";
+    cin >> n; 
 
-    //for (int i = 0; i<n; ++i)
-    //{
-    //    int data;
-    //    cout << "enter node " << i+1 << " value: "; 
-    //    cin >> data;
-    //    root = insert(root, data);
-    //} 
-
-    //root = insert(root, 50);
-    //root = insert(root, 80);
-    //root = insert(root, 20);
-    //root = insert(root, 120);
-    //root = insert(root, 60);
-    //root = insert(root, 150);
+    node *root = nullptr;
+    for (int i = 0; i<n; ++i)
+    {
+        int data;
+        cout << "enter node " << i+1 << " value: "; 
+        cin >> data;
+        insert(root, data);
+    } 
 
     printInOrder(root);
     return 0;
 }
 
 
-node *insert(node *node, int data)
+void insert(node * &root, int data)
 {
-    if (node == NULL)
-        return newNode(data);
-    else
-    {
-        if (data >= node->data)
-           node->right = insert(node->right, data);
-        else
-           node->left = insert(node->left, data);
-        return node;
+    if (root == nullptr){
+        root = newNode(data);
+        return;
     }
+
+    else if (data < root->data)
+        insert(root->left, data);
+
+    else if (data > root->data)
+        insert(root->right, data);
+
+    else
+        ;
 }
 
 void printInOrder(node *root)
