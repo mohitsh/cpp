@@ -4,9 +4,9 @@
 using namespace std;
 
 
-void insert(node * &, int);
+void insert(node* &, int);
 void printInOrder(node*);
-
+void remove(node* &, int);
 int main()
 { /*node *root;
     root = new node;
@@ -48,6 +48,14 @@ int main()
     } 
 
     printInOrder(root);
+
+    int rm;
+    cout << "node to remove: ";
+    cin >> rm;
+    
+    remove(root, rm);
+    printInOrder(root);
+
     return 0;
 }
 
@@ -67,6 +75,31 @@ void insert(node * &root, int data)
 
     else
         ;
+}
+
+node *findMin(node *root){
+    if (root == nullptr) return root;
+    while(root->left != nullptr) root = root->left;
+    return root;
+}
+
+void remove(node* &root, int data){
+    if (root == nullptr) return;
+
+    if (data < root->data) remove(root->left, data);
+    else if (data > root->data) remove(root->right, data);
+
+    else if (root->left != nullptr && root->right != nullptr){
+        // replace with min val of right subtre
+        root->data = findMin(root->right)->data; 
+        remove(root->right, root->data);
+    }
+
+    else{
+        node *oldNode = root;
+        root = (root->left != nullptr) ? root->left : root->right;
+        delete oldNode;
+    }
 }
 
 void printInOrder(node *root)
